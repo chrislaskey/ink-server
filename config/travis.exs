@@ -5,5 +5,6 @@ config :ink, Ink.Repo,
   username: "postgres",
   password: "",
   database: "ink_test",
+  hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
