@@ -41,3 +41,5 @@ config :ink, Ink.Repo,
   database: System.get_env("POSTGRES_DB"),
   hostname: System.get_env("POSTGRES_HOST"),
   pool_size: 10
+
+config :ink, :graphiql, true

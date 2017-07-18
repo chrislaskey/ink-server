@@ -19,6 +19,13 @@ defmodule Ink.Router do
     get "/", PageController, :index
   end
 
+  forward "/api", Absinthe.Plug,
+    schema: Ink.Schema
+
+  if Application.get_env(:ink, :graphiql, false), do:
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: Ink.Schema
+
   # Other scopes may use custom stacks.
   # scope "/api", Ink do
   #   pipe_through :api
