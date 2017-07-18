@@ -3,7 +3,7 @@ defmodule Ink.PostTest do
 
   alias Ink.Post
 
-  @valid_attrs %{body: "some content", title: "some content"}
+  @valid_attrs %{body: "some content", title: "some content", user_id: 1}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

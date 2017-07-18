@@ -1,4 +1,4 @@
-defmodule Ink.UserResolver do
+defmodule Ink.Resolver.User do
   alias Ink.Repo
   alias Ink.User
 

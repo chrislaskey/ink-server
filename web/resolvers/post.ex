@@ -1,4 +1,4 @@
-defmodule Ink.PostResolver do
+defmodule Ink.Resolver.Post do
   alias Ink.Repo
   alias Ink.Post
 
@@ -11,5 +11,11 @@ defmodule Ink.PostResolver do
       nil -> {:error, "Post id #{id} not found"}
       post -> {:ok, post}
     end
+  end
+
+  def create(args, _info) do
+    %Post{}
+    |> Post.changeset(args)
+    |> Repo.insert
   end
 end
