@@ -18,5 +18,9 @@ matrix:
     - elixir: 1.3
       otp_release: 19.3
 
+before_install:
+  - cp config/travis.exs config/test.exs
+  - mix local.rebar --force
+
 before_script:
   - mix do ecto.create, ecto.migrate
