@@ -18,4 +18,10 @@ defmodule Ink.Resolver.Post do
     |> Post.changeset(args)
     |> Repo.insert
   end
+
+  def update(%{id: id, post: params}, _info) do
+    Repo.get!(Post, id)
+    |> Post.changeset()
+    |> Repo.update
+  end
 end
