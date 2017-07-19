@@ -24,4 +24,9 @@ defmodule Ink.Resolver.Post do
     |> Post.changeset()
     |> Repo.update
   end
+
+  def delete(%{id: id}, _info) do
+    post = Repo.get!(Post, id)
+    Repo.delete(post)
+  end
 end
