@@ -1,8 +1,8 @@
 defmodule Ink.Guardian.Serializer do
   @behaviour Guardian.Serializer
  
-  alias MyApp.Repo
-  alias MyApp.User
+  alias Ink.Repo
+  alias Ink.User
  
   def for_token(user = %User{}), do: { :ok, "User:#{user.id}" }
   def for_token(_), do: { :error, "Unknown resource type" }

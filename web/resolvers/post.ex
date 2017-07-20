@@ -13,15 +13,15 @@ defmodule Ink.Resolver.Post do
     end
   end
 
-  def create(args, _info) do
+  def create(params, _info) do
     %Post{}
-    |> Post.changeset(args)
+    |> Post.changeset(params)
     |> Repo.insert
   end
 
-  def update(%{id: id, post: params}, _info) do
+  def update(%{id: id, post: post_params}, _info) do
     Repo.get!(Post, id)
-    |> Post.changeset()
+    |> Post.changeset(post_params)
     |> Repo.update
   end
 
