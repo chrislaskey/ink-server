@@ -16,7 +16,7 @@ defmodule Ink.Router do
   pipeline :graphql do
     plug Guardian.Plug.VerifyHeader, realm: "Bearer"
     plug Guardian.Plug.LoadResource
-    plug Ink.Web.Context
+    plug Ink.Plug.Context
   end
 
   scope "/", Ink do

@@ -1,4 +1,4 @@
-defmodule Ink.Web.Context do
+defmodule Ink.Plug.Context do
   @behaviour Plug
 
   import Plug.Conn
