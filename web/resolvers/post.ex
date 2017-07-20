@@ -1,10 +1,18 @@
 defmodule Ink.Resolver.Post do
+  import Ecto.Query, only: [where: 2]
+
   alias Ink.Repo
   alias Ink.Post
 
-  def all(_args, _info) do
-    {:ok, Repo.all(Post)}
+  def all(_args, %{context: %{current_user: %{id: id}}}) do
+    posts = Post
+      |> where(id: ^id)
+      |> Repo.all
+
+    {:ok, posts}
   end
+
+  def all(_args, _info), do: {:error, "Not Authorized"}
 
   def find(%{id: id}, _info) do
     case Repo.get(Post, id) do
