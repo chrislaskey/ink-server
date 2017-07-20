@@ -14,6 +14,10 @@ defmodule Ink.Schema do
       resolve &Resolver.Post.find/2
     end
 
+    field :user_posts, list_of(:post) do
+      resolve &Resolver.Post.all_user_posts/2
+    end
+
     field :users, list_of(:user) do
       resolve &Resolver.User.all/2
     end
@@ -62,6 +66,13 @@ defmodule Ink.Schema do
       arg :user, :update_user_params
 
       resolve &Resolver.User.update/2
+    end
+
+    field :login, type: :session do
+      arg :email, non_null(:string)
+      arg :password, non_null(:string)
+
+      resolve &Resolver.User.login/2
     end
   end
 end
