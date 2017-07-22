@@ -41,6 +41,7 @@ defmodule Ink.Mixfile do
      {:absinthe, "~> 1.3.0"},
      {:absinthe_plug, "~> 1.3.0"},
      {:absinthe_ecto, git: "https://github.com/absinthe-graphql/absinthe_ecto.git"},
+     {:cors_plug, "~> 1.4"},
      {:poison, "~> 2.2.0"},
      {:faker, "~> 0.7"},
      {:comeonin, "~> 2.5"},

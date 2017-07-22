@@ -38,5 +38,7 @@ defmodule Ink.Endpoint do
     key: "_ink_key",
     signing_salt: "+D27Ga+r"
 
+  plug CORSPlug, origin: ["*"]
+
   plug Ink.Router
 end
