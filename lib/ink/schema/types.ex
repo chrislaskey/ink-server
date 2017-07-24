@@ -18,5 +18,6 @@ defmodule Ink.Schema.Types do
 
   object :session do
     field :token, :string
+    field :user, :user
   end
 end

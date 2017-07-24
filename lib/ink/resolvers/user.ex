@@ -23,7 +23,7 @@ defmodule Ink.Resolver.User do
   def login(params, _info) do
     with {:ok, user} <- Session.authenticate(params, Repo),
          {:ok, jwt, _ } <- Guardian.encode_and_sign(user, :access) do
-      {:ok, %{token: jwt}}
+      {:ok, %{token: jwt, user: user}}
     end
   end
 end
