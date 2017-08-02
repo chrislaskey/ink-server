@@ -35,7 +35,7 @@ defmodule Ink.Resolver.Post do
 
   def update(%{id: id, post: post_params}, _info) do
     Repo.get!(Post, id)
-    |> Post.changeset(post_params)
+    |> Post.update_changeset(post_params)
     |> Repo.update
   end
 

@@ -33,6 +33,12 @@ defmodule Ink.Post do
     |> validate_required([:title, :body, :user_id])
   end
 
+  def update_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:title, :body, :user_id])
+    |> validate_required([:title, :body, :user_id])
+  end
+
   def uid_changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:uid])
