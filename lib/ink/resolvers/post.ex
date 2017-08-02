@@ -18,9 +18,9 @@ defmodule Ink.Resolver.Post do
 
   def all_user_posts(_args, _info), do: {:error, "Not Authorized"}
 
-  def find(%{id: id}, _info) do
-    case Repo.get(Post, id) do
-      nil -> {:error, "Post id #{id} not found"}
+  def find(%{uid: uid}, _info) do
+    case Repo.get_by(Post, uid: uid) do
+      nil -> {:error, "Post #{uid} not found"}
       post -> {:ok, post}
     end
   end
@@ -33,14 +33,14 @@ defmodule Ink.Resolver.Post do
     |> Repo.update
   end
 
-  def update(%{id: id, post: post_params}, _info) do
-    Repo.get!(Post, id)
+  def update(%{uid: uid, post: post_params}, _info) do
+    Repo.get_by!(Post, uid: uid)
     |> Post.update_changeset(post_params)
     |> Repo.update
   end
 
-  def delete(%{id: id}, _info) do
-    post = Repo.get!(Post, id)
+  def delete(%{uid: uid}, _info) do
+    post = Repo.get_by!(Post, uid: uid)
     Repo.delete(post)
   end
 end

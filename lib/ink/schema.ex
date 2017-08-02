@@ -10,7 +10,7 @@ defmodule Ink.Schema do
     end
 
     field :post, type: :post do
-      arg :id, non_null(:id)
+      arg :uid, non_null(:string)
       resolve &Resolver.Post.find/2
     end
 
@@ -50,14 +50,14 @@ defmodule Ink.Schema do
     end
 
     field :update_post, type: :post do
-      arg :id, non_null(:integer)
+      arg :uid, non_null(:string)
       arg :post, :update_post_params
 
       resolve &Resolver.Post.update/2
     end
 
     field :delete_post, type: :post do
-      arg :id, non_null(:integer)
+      arg :uid, non_null(:string)
       resolve &Resolver.Post.delete/2
     end
 

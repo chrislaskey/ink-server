@@ -10,7 +10,6 @@ defmodule Ink.Schema.Types do
   end
 
   object :post do
-    field :id, :id
     field :uid, :string
     field :secret, :string
     field :title, :string
