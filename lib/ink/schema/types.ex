@@ -11,6 +11,8 @@ defmodule Ink.Schema.Types do
 
   object :post do
     field :id, :id
+    field :uid, :string
+    field :secret, :string
     field :title, :string
     field :body, :string
     field :user, :user, resolve: assoc(:user)
