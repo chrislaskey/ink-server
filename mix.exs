@@ -45,7 +45,8 @@ defmodule Ink.Mixfile do
      {:poison, "~> 2.2.0"},
      {:faker, "~> 0.7"},
      {:comeonin, "~> 2.5"},
-     {:guardian, "~> 0.14.4"}]
+     {:guardian, "~> 0.14.4"},
+     {:hashids, "~> 2.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
