@@ -9,7 +9,7 @@ defmodule Ink.Repo.Migrations.CreatePost do
 
       timestamps()
     end
-    create index(:posts, [:user_id])
 
+    create index(:posts, [:user_id])
   end
 end

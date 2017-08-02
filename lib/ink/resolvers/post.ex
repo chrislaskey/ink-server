@@ -29,6 +29,8 @@ defmodule Ink.Resolver.Post do
     %Post{}
     |> Post.changeset(params)
     |> Repo.insert
+    |> Post.add_uid
+    |> Repo.update
   end
 
   def update(%{id: id, post: post_params}, _info) do

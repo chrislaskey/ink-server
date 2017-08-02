@@ -1,12 +1,21 @@
 defmodule Ink.Post do
+  alias Ink.Uid
   use Ink.Web, :model
 
   schema "posts" do
+    field :uid, :string
     field :title, :string
     field :body, :string
     belongs_to :user, Ink.User
 
     timestamps()
+  end
+
+  def add_uid({:ok, struct}) do
+    %Ink.Post{id: id} = struct
+    params = %{uid: Uid.encode(id)}
+
+    uid_changeset(struct, params)
   end
 
   @doc """
@@ -16,5 +25,11 @@ defmodule Ink.Post do
     struct
     |> cast(params, [:title, :body, :user_id])
     |> validate_required([:title, :body, :user_id])
+  end
+
+  def uid_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:uid])
+    |> validate_required([:uid])
   end
 end
