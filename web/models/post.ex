@@ -1,6 +1,4 @@
 defmodule Ink.Post do
-  alias Ink.Tools.Uid
-  alias Ink.Tools.Secret
   use Ink.Web, :model
 
   schema "posts" do

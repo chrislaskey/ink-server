@@ -18,11 +18,14 @@ Repo.insert!(%User{name: "Chris Laskey", email: "contact@chrislaskey.com"})
 Repo.insert!(%User{name: "Denali", email: "denali@chrislaskey.com"})
 
 Enum.map(1..10, fn(_) ->
-  Ink.Repo.insert!(%Post{
+  Repo.insert(%Post{
+    secret: Secret.create,
     title: Faker.Lorem.sentence,
     body: Faker.Lorem.paragraph,
     user_id: [1, 2] |> Enum.take_random(1) |> hd
   })
+    |> Post.add_uid
+    |> Repo.update
 end)
 
 ### Alternative way using a Module to organize code:

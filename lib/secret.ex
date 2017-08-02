@@ -1,4 +1,4 @@
-defmodule Ink.Tools.Secret do
+defmodule Secret do
   @characters "123456789abdegjklmnopqrvwxyzABDEGJKLMNOPQRVWXYZ"
   @charlist String.split(@characters, "")
 
