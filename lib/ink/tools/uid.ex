@@ -1,4 +1,4 @@
-defmodule Ink.Uid do
+defmodule Ink.Tools.Uid do
   @characters "123456789abdegjklmnopqrvwxyz"
 
   @coder Hashids.new([

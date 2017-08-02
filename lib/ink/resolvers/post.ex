@@ -27,7 +27,7 @@ defmodule Ink.Resolver.Post do
 
   def create(params, _info) do
     %Post{}
-    |> Post.changeset(params)
+    |> Post.changeset(Post.add_secret(params))
     |> Repo.insert
     |> Post.add_uid
     |> Repo.update
