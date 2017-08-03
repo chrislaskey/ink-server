@@ -27,7 +27,7 @@ defmodule Ink.Post do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :body, :user_id], [:secret])
+    |> cast(params, [:title, :body, :user_id, :secret])
     |> validate_required([:title, :body, :user_id])
   end
 
