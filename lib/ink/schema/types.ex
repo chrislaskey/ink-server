@@ -2,11 +2,9 @@ defmodule Ink.Schema.Types do
   use Absinthe.Schema.Notation
   use Absinthe.Ecto, repo: Ink.Repo
 
-  object :user do
-    field :id, :id
+  object :label do
     field :name, :string
-    field :email, :string
-    field :posts, list_of(:post), resolve: assoc(:posts) 
+    field :user, :user, resolve: assoc(:user)
   end
 
   object :post do
@@ -21,5 +19,12 @@ defmodule Ink.Schema.Types do
     field :token, :string
     field :token_expiration, :string
     field :user, :user
+  end
+
+  object :user do
+    field :id, :id
+    field :name, :string
+    field :email, :string
+    field :posts, list_of(:post), resolve: assoc(:posts)
   end
 end

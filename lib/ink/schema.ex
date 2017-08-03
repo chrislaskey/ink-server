@@ -47,6 +47,13 @@ defmodule Ink.Schema do
   end
 
   mutation do
+    field :login, type: :session do
+      arg :email, non_null(:string)
+      arg :password, non_null(:string)
+
+      resolve &Resolver.User.login/2
+    end
+
     field :create_post, type: :post do
       arg :title, non_null(:string)
       arg :body, non_null(:string)
@@ -74,11 +81,11 @@ defmodule Ink.Schema do
       resolve &Resolver.User.update/2
     end
 
-    field :login, type: :session do
-      arg :email, non_null(:string)
-      arg :password, non_null(:string)
+    field :create_label, type: :label do
+      arg :name, non_null(:string)
+      arg :user_id, non_null(:integer)
 
-      resolve &Resolver.User.login/2
+      resolve &Resolver.Label.create/2
     end
   end
 end

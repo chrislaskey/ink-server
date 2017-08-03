@@ -2,7 +2,7 @@ defmodule Ink.Label do
   use Ink.Web, :model
 
   schema "labels" do
-    field :title, :string
+    field :name, :string
     belongs_to :user, Ink.User
     many_to_many :posts, Ink.Post, join_through: "labels_posts"
 
@@ -14,7 +14,7 @@ defmodule Ink.Label do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title])
-    |> validate_required([:title])
+    |> cast(params, [:name, :user_id])
+    |> validate_required([:name, :user_id])
   end
 end

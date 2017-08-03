@@ -3,7 +3,7 @@ defmodule Ink.LabelTest do
 
   alias Ink.Label
 
-  @valid_attrs %{title: "some content"}
+  @valid_attrs %{name: "some content", user_id: 1}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
