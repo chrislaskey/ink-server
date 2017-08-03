@@ -14,6 +14,12 @@ defmodule Ink.Schema do
       resolve &Resolver.Post.find/2
     end
 
+    field :public_post, type: :post do
+      arg :uid, non_null(:string)
+      arg :secret, non_null(:string)
+      resolve &Resolver.Post.find/2
+    end
+
     field :user_posts, list_of(:post) do
       resolve &Resolver.Post.all_user_posts/2
     end

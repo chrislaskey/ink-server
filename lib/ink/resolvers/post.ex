@@ -25,6 +25,13 @@ defmodule Ink.Resolver.Post do
     end
   end
 
+  def find_by_secret(%{uid: uid, secret: secret}, _info) do
+    case Repo.get_by(Post, %{secret: secret, uid: uid}) do
+      nil -> {:error, "Post #{uid} not found"}
+      post -> {:ok, post}
+    end
+  end
+
   def create(params, _info) do
     %Post{}
     |> Post.changeset(Post.add_secret(params))
