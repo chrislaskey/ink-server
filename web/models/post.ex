@@ -7,6 +7,7 @@ defmodule Ink.Post do
     field :title, :string
     field :body, :string
     belongs_to :user, Ink.User
+    many_to_many :labels, Ink.Label, join_through: "labels_posts"
 
     timestamps()
   end
