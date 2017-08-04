@@ -3,6 +3,8 @@ defmodule Ink.Resolver.Post do
 
   alias Ink.Repo
   alias Ink.Post
+  alias Ink.Post.Instance, as: PostInstance
+  alias Ink.Label.Instance, as: LabelInstance
 
   def all(_args, _info) do
     {:ok, Repo.all(Post)}
@@ -49,5 +51,24 @@ defmodule Ink.Resolver.Post do
   def delete(%{uid: uid}, _info) do
     post = Repo.get_by!(Post, uid: uid)
     Repo.delete(post)
+  end
+
+  def add_label(
+    %{label_id: label_id, uid: uid},
+    %{context: %{current_user: %{id: user_id}}}
+  ) do
+    with {:ok, label} <- LabelInstance.owner?(label_id, user_id),
+         {:ok, post} <- PostInstance.owner?(uid, user_id) do
+      params = %{
+        labels: [ label | PostInstance.labels(post) ]
+      }
+
+      post
+      |> Repo.preload([:labels, :user])
+      |> Post.label_changeset(params)
+      |> Repo.update
+    else
+      {:error, reason} -> {:error, reason}
+    end
   end
 end

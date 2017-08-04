@@ -8,4 +8,5 @@ defmodule Ink.Resolver.Label do
     |> Label.changeset(params)
     |> Repo.insert
   end
+
 end

@@ -7,7 +7,7 @@ defmodule Ink.Post do
     field :title, :string
     field :body, :string
     belongs_to :user, Ink.User
-    many_to_many :labels, Ink.Label, join_through: "labels_posts"
+    many_to_many :labels, Ink.Label, join_through: "labels_posts", on_replace: :delete
 
     timestamps()
   end
@@ -42,5 +42,11 @@ defmodule Ink.Post do
     struct
     |> cast(params, [:uid])
     |> validate_required([:uid])
+  end
+
+  def label_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:title, :body, :user_id])
+    |> put_assoc(:labels, params[:labels])
   end
 end
