@@ -1,5 +1,4 @@
 defmodule Ink.Label.Instance do
-
   alias Ink.Repo
   alias Ink.Label
 
@@ -9,5 +8,4 @@ defmodule Ink.Label.Instance do
       label -> {:ok, label}
     end
   end
-
 end

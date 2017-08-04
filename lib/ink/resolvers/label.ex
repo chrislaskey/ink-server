@@ -1,5 +1,4 @@
 defmodule Ink.Resolver.Label do
-
   alias Ink.Repo
   alias Ink.Label
 
@@ -8,5 +7,4 @@ defmodule Ink.Resolver.Label do
     |> Label.changeset(params)
     |> Repo.insert
   end
-
 end

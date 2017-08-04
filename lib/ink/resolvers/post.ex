@@ -71,4 +71,23 @@ defmodule Ink.Resolver.Post do
       {:error, reason} -> {:error, reason}
     end
   end
+
+  def remove_label(
+    %{label_id: label_id, uid: uid},
+    %{context: %{current_user: %{id: user_id}}}
+  ) do
+    with {:ok, label} <- LabelInstance.owner?(label_id, user_id),
+         {:ok, post} <- PostInstance.owner?(uid, user_id) do
+      params = %{
+        labels: List.delete(PostInstance.labels(post), label)
+      }
+
+      post
+      |> Repo.preload([:labels, :user])
+      |> Post.label_changeset(params)
+      |> Repo.update
+    else
+      {:error, reason} -> {:error, reason}
+    end
+  end
 end

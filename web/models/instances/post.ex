@@ -1,5 +1,4 @@
 defmodule Ink.Post.Instance do
-
   alias Ink.Repo
   alias Ink.Post
 
@@ -10,8 +9,7 @@ defmodule Ink.Post.Instance do
     end
   end
 
-  def labels(post) do
+  def labels(%Post{} = post) do
     Repo.preload(post, [:labels]).labels
   end
-
 end
