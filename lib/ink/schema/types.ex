@@ -14,6 +14,7 @@ defmodule Ink.Schema.Types do
     field :title, :string
     field :body, :string
     field :user, :user, resolve: assoc(:user)
+    field :labels, list_of(:label), resolve: assoc(:labels)
   end
 
   object :session do
