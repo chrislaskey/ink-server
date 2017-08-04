@@ -98,7 +98,6 @@ defmodule Ink.Schema do
     field :create_label, type: :label do
       arg :name, non_null(:string)
       arg :color, non_null(:string)
-      arg :user_id, non_null(:integer)
 
       resolve &Resolver.Label.create/2
     end
