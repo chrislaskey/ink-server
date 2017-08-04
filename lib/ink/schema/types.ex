@@ -4,6 +4,7 @@ defmodule Ink.Schema.Types do
 
   object :label do
     field :name, :string
+    field :color, :string
     field :user, :user, resolve: assoc(:user)
   end
 

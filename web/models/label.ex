@@ -3,6 +3,7 @@ defmodule Ink.Label do
 
   schema "labels" do
     field :name, :string
+    field :color, :string
     belongs_to :user, Ink.User
     many_to_many :posts, Ink.Post, join_through: "labels_posts"
 
