@@ -24,10 +24,6 @@ defmodule Ink.Schema do
       resolve &Resolver.Post.find/2
     end
 
-    field :user_posts, list_of(:post) do
-      resolve &Resolver.Post.all_user_posts/2
-    end
-
     field :users, list_of(:user) do
       resolve &Resolver.User.all/2
     end

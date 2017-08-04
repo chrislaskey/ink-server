@@ -10,6 +10,7 @@ defmodule Ink.Resolver.Post do
     posts = Post
       |> where(user_id: ^id)
       |> Repo.all
+      |> Repo.preload([:labels])
 
     {:ok, posts}
   end

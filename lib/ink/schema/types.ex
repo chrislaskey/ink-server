@@ -3,6 +3,7 @@ defmodule Ink.Schema.Types do
   use Absinthe.Ecto, repo: Ink.Repo
 
   object :label do
+    field :id, :id
     field :name, :string
     field :color, :string
     field :user, :user, resolve: assoc(:user)
