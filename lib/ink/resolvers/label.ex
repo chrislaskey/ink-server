@@ -1,6 +1,16 @@
 defmodule Ink.Resolver.Label do
+  import Ecto.Query, only: [where: 2]
+
   alias Ink.Repo
   alias Ink.Label
+
+  def all(_args, %{context: %{current_user: %{id: id}}}) do
+    labels = Label
+      |> where(user_id: ^id)
+      |> Repo.all
+
+    {:ok, labels}
+  end
 
   def create(params, %{context: %{current_user: %{id: id}}}) do
     %Label{}

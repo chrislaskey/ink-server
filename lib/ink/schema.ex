@@ -5,6 +5,10 @@ defmodule Ink.Schema do
   alias Ink.Resolver
 
   query do
+    field :labels, list_of(:label) do
+      resolve &Resolver.Label.all/2
+    end
+
     field :posts, list_of(:post) do
       resolve &Resolver.Post.all/2
     end

@@ -6,11 +6,7 @@ defmodule Ink.Resolver.Post do
   alias Ink.Post.Instance, as: PostInstance
   alias Ink.Label.Instance, as: LabelInstance
 
-  def all(_args, %{context: %{current_user: %{id: user_id}}}) do
-    {:ok, Repo.get_by(Post, user_id: user_id)}
-  end
-
-  def all_user_posts(_args, %{context: %{current_user: %{id: id}}}) do
+  def all(_args, %{context: %{current_user: %{id: id}}}) do
     posts = Post
       |> where(user_id: ^id)
       |> Repo.all
@@ -18,7 +14,7 @@ defmodule Ink.Resolver.Post do
     {:ok, posts}
   end
 
-  def all_user_posts(_args, _info), do: {:error, "Not Authorized"}
+  def all(_args, _info), do: {:error, "Not Authorized"}
 
   def find(%{uid: uid}, _info) do
     case Repo.get_by(Post, uid: uid) do
