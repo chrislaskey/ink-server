@@ -4,21 +4,22 @@ defmodule Ink.Resolver.Label do
   alias Ink.Repo
   alias Ink.Label
 
-  def all(_args, %{context: %{current_user: %{id: id}}}) do
+  def all(%{user_id: id}, _) when is_nil(id), do: {:error, "Not Authorized"}
+
+  def all(params, _info) do
     labels = Label
-      |> where(user_id: ^id)
+      |> where(user_id: ^params[:user_id])
       |> Repo.all
+      |> Repo.preload([:posts])
 
     {:ok, labels}
   end
 
-  def create(params, %{context: %{current_user: %{id: id}}}) do
-    %Label{}
-    |> Label.changeset(add_user_id(params, id))
-    |> Repo.insert
-  end
+  def create(%{user_id: id}, _) when is_nil(id), do: {:error, "Not Authorized"}
 
-  defp add_user_id(params, user_id) do
-    Map.put(params, :user_id, user_id)
+  def create(params, _info) do
+    %Label{}
+    |> Label.changeset(params)
+    |> Repo.insert
   end
 end

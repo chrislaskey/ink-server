@@ -4,18 +4,34 @@ defmodule Ink.Schema do
 
   alias Ink.Resolver
 
+  defp add_user_id_to_params(params, %{context: %{current_user: %{id: id}}}), do: Map.put(params, :user_id, id)
+  defp add_user_id_to_params(params, _), do: Map.put(params, :user_id, nil)
+
   query do
     field :labels, list_of(:label) do
-      resolve &Resolver.Label.all/2
+      resolve fn params, info ->
+        params
+        |> add_user_id_to_params(info)
+        |> Resolver.Label.all(info)
+      end
     end
 
     field :posts, list_of(:post) do
-      resolve &Resolver.Post.all/2
+      resolve fn params, info ->
+        params
+        |> add_user_id_to_params(info)
+        |> Resolver.Post.all(info)
+      end
     end
 
     field :post, type: :post do
       arg :uid, non_null(:string)
-      resolve &Resolver.Post.find/2
+
+      resolve fn params, info ->
+        params
+        |> add_user_id_to_params(info)
+        |> Resolver.Post.find(info)
+      end
     end
 
     field :public_post, type: :post do
