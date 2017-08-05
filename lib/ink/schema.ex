@@ -7,37 +7,38 @@ defmodule Ink.Schema do
   defp add_user_id_to_params(params, %{context: %{current_user: %{id: id}}}), do: Map.put(params, :user_id, id)
   defp add_user_id_to_params(params, _), do: Map.put(params, :user_id, nil)
 
+  defp current_user?(%{context: %{current_user: %{id: id}}}), do: true
+  defp current_user?(_), do: false
+
+  defp restrict(resolver) do
+    fn (params, info) ->
+      case current_user?(info) do
+        false -> {:error, "Not Authorized"}
+        true -> params
+                |> add_user_id_to_params(info)
+                |> resolver.(info)
+      end
+    end
+  end
+
   query do
     field :labels, list_of(:label) do
-      resolve fn params, info ->
-        params
-        |> add_user_id_to_params(info)
-        |> Resolver.Label.all(info)
-      end
+      resolve restrict &Resolver.Label.all/2
     end
 
     field :posts, list_of(:post) do
-      resolve fn params, info ->
-        params
-        |> add_user_id_to_params(info)
-        |> Resolver.Post.all(info)
-      end
+      resolve restrict &Resolver.Post.all/2
     end
 
     field :post, type: :post do
       arg :uid, non_null(:string)
-
-      resolve fn params, info ->
-        params
-        |> add_user_id_to_params(info)
-        |> Resolver.Post.find(info)
-      end
+      resolve restrict &Resolver.Post.find/2
     end
 
     field :public_post, type: :post do
       arg :uid, non_null(:string)
       arg :secret, non_null(:string)
-      resolve &Resolver.Post.find/2
+      resolve &Resolver.Post.find_by_secret/2
     end
 
     field :users, list_of(:user) do
