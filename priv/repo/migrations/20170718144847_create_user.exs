@@ -5,6 +5,7 @@ defmodule Ink.Repo.Migrations.CreateUser do
     create table(:users) do
       add :name, :string
       add :email, :string
+      add :password_hash, :string
 
       timestamps()
     end

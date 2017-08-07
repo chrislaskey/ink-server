@@ -11,28 +11,28 @@
 # and so on) as they will fail if something goes wrong.
 
 alias Ink.User
-alias Ink.Post
+alias Ink.Note
 alias Ink.Repo
 
 Repo.insert!(%User{name: "Chris Laskey", email: "contact@chrislaskey.com"})
 Repo.insert!(%User{name: "Denali", email: "denali@chrislaskey.com"})
 
 Enum.map(1..10, fn(_) ->
-  Repo.insert(%Post{
+  Repo.insert(%Note{
     secret: Secret.create,
     title: Faker.Lorem.sentence,
     body: Faker.Lorem.paragraph,
     user_id: [1, 2] |> Enum.take_random(1) |> hd
   })
-    |> Post.add_uid
+    |> Note.add_uid
     |> Repo.update
 end)
 
 ### Alternative way using a Module to organize code:
 
 # defmodule Ink.Seeds do
-#   def generate_posts() do
-#     Ink.Repo.insert!(%Post{
+#   def generate_notes() do
+#     Ink.Repo.insert!(%Note{
 #       title: Faker.Lorem.sentence,
 #       body: Faker.Lorem.paragraph,
 #       user_id: [1, 2] |> Enum.take_random(1) |> hd
@@ -41,13 +41,13 @@ end)
 # end
 
 # Long form:
-# Enum.map(1..10, fn(_) -> Ink.Seeds.generate_posts(_) end)
+# Enum.map(1..10, fn(_) -> Ink.Seeds.generate_notes(_) end)
 
 # Short form (using & syntax):
-# Enum.map(1..10, &Ink.Seeds.generate_posts(&1))
+# Enum.map(1..10, &Ink.Seeds.generate_notes(&1))
 
 ### Alternative way using `for`:
 
 # for _ <- 1..10 do
-#   Repo.insert!(%Post{})
+#   Repo.insert!(%Note{})
 # end

@@ -3,6 +3,7 @@ defmodule Ink.Repo.Migrations.CreateLabel do
 
   def change do
     create table(:labels) do
+      add :color, :string
       add :name, :string
       add :user_id, references(:users, on_delete: :nothing)
 
