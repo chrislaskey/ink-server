@@ -5,9 +5,6 @@ defmodule Ink.Schema.Types.User do
 
   alias Ink.Resolver
 
-  object :user_queries do
-  end
-
   input_object :update_user_params do
     field :name, :string
     field :email, :string
