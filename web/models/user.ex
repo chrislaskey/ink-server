@@ -27,6 +27,7 @@ defmodule Ink.User do
     struct
     |> cast(params, [:name, :email, :password])
     |> validate_required([:name, :email])
+    |> validate_length(:password, min: 12)
     |> put_password_hash()
   end
 
