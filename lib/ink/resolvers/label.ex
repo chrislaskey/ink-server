@@ -9,7 +9,7 @@ defmodule Ink.Resolver.Label do
     labels = Label
       |> where(user_id: ^CurrentUser.id info)
       |> Repo.all
-      |> Repo.preload([:posts])
+      |> Repo.preload([:notes])
 
     {:ok, labels}
   end

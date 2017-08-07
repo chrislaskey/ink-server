@@ -8,12 +8,12 @@ defmodule Ink.Schema do
 
   query do
     import_fields :label_queries
-    import_fields :post_queries
+    import_fields :note_queries
   end
 
   mutation do
     import_fields :label_mutations
-    import_fields :post_mutations
+    import_fields :note_mutations
     import_fields :user_mutations
   end
 end

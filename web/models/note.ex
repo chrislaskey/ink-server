@@ -1,13 +1,13 @@
 defmodule Ink.Note do
   use Ink.Web, :model
 
-  schema "posts" do
+  schema "notes" do
     field :uid, :string
     field :secret, :string
     field :title, :string
     field :body, :string
     belongs_to :user, Ink.User
-    many_to_many :labels, Ink.Label, join_through: "labels_posts", on_replace: :delete
+    many_to_many :labels, Ink.Label, join_through: "labels_notes", on_replace: :delete
 
     timestamps()
   end

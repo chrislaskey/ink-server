@@ -9,7 +9,7 @@ defmodule Ink.Schema.Types do
     field :user, :user, resolve: assoc(:user)
   end
 
-  object :post do
+  object :note do
     field :uid, :string
     field :secret, :string
     field :title, :string
@@ -30,6 +30,6 @@ defmodule Ink.Schema.Types do
     field :id, :id
     field :name, :string
     field :email, :string
-    field :posts, list_of(:post), resolve: assoc(:posts)
+    field :notes, list_of(:note), resolve: assoc(:notes)
   end
 end

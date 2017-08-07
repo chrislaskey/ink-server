@@ -8,25 +8,25 @@ defmodule Ink.Resolver.Note do
   alias Ink.Label.Instance, as: LabelInstance
 
   def all(_params, info) do
-    posts = Note
+    notes = Note
       |> where(user_id: ^CurrentUser.id info)
       |> Repo.all
       |> Repo.preload([:labels])
 
-    {:ok, posts}
+    {:ok, notes}
   end
 
   def find(%{uid: uid}, info) do
     case Repo.get_by(Note, uid: uid, user_id: CurrentUser.id info) do
       nil -> {:error, "Note #{uid} not found"}
-      post -> {:ok, post}
+      note -> {:ok, note}
     end
   end
 
   def find_by_secret(%{uid: uid, secret: secret}, _info) do
     case Repo.get_by(Note, %{secret: secret, uid: uid}) do
       nil -> {:error, "Note #{uid} not found"}
-      post -> {:ok, post}
+      note -> {:ok, note}
     end
   end
 
@@ -42,8 +42,8 @@ defmodule Ink.Resolver.Note do
     |> Repo.update
   end
 
-  def update(%{uid: uid, post: post_params}, info) do
-    params = CurrentUser.add(post_params, info)
+  def update(%{uid: uid, note: note_params}, info) do
+    params = CurrentUser.add(note_params, info)
 
     Repo.get_by!(Note, uid: uid)
     |> Note.update_changeset(params)
@@ -51,19 +51,19 @@ defmodule Ink.Resolver.Note do
   end
 
   def delete(%{uid: uid}, info) do
-    post = Repo.get_by!(Note, uid: uid, user_id: CurrentUser.id info)
+    note = Repo.get_by!(Note, uid: uid, user_id: CurrentUser.id info)
 
-    Repo.delete(post)
+    Repo.delete(note)
   end
 
   def add_label(%{label_id: label_id, uid: uid}, info) do
     with {:ok, label} <- LabelInstance.owner?(label_id, CurrentUser.id info),
-         {:ok, post} <- NoteInstance.owner?(uid, CurrentUser.id info) do
+         {:ok, note} <- NoteInstance.owner?(uid, CurrentUser.id info) do
       params = %{
-        labels: [ label | NoteInstance.labels(post) ]
+        labels: [ label | NoteInstance.labels(note) ]
       }
 
-      post
+      note
       |> Repo.preload([:labels, :user])
       |> Note.label_changeset(params)
       |> Repo.update
@@ -74,12 +74,12 @@ defmodule Ink.Resolver.Note do
 
   def remove_label(%{label_id: label_id, uid: uid}, info) do
     with {:ok, label} <- LabelInstance.owner?(label_id, CurrentUser.id info),
-         {:ok, post} <- NoteInstance.owner?(uid, CurrentUser.id info) do
+         {:ok, note} <- NoteInstance.owner?(uid, CurrentUser.id info) do
       params = %{
-        labels: List.delete(NoteInstance.labels(post), label)
+        labels: List.delete(NoteInstance.labels(note), label)
       }
 
-      post
+      note
       |> Repo.preload([:labels, :user])
       |> Note.label_changeset(params)
       |> Repo.update
