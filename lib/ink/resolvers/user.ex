@@ -1,23 +1,16 @@
 defmodule Ink.Resolver.User do
   alias Ink.Repo
+  alias Ink.CurrentUser
   alias Ink.User
   alias Ink.Session
 
-  def all(_args, _info) do
-    {:ok, Repo.all(User)}
-  end
-
-  def find(%{id: id}, _info) do
-    case Repo.get(User, id) do
-      nil -> {:error, "User id #{id} not found"}
-      user -> {:ok, user}
+  def update(%{id: id, user: user_params}, info) do
+    case id == CurrentUser.id(info) do
+      false -> {:error, "Not authorized to update user account #{id}"}
+      true -> Repo.get!(User, id)
+              |> User.update_changeset(user_params)
+              |> Repo.update
     end
-  end
-
-  def update(%{id: id, user: user_params}, _info) do
-    Repo.get!(User, id)
-    |> User.update_changeset(user_params)
-    |> Repo.update
   end
 
   def login(params, _info) do

@@ -1,17 +1,11 @@
 defmodule Ink.Schema.Types.User do
   use Absinthe.Schema.Notation
 
-  alias Ink.Resolver
-  
-  object :user_queries do
-    field :users, list_of(:user) do
-      resolve &Resolver.User.all/2
-    end
+  import Ink.Request, only: [with_login: 1]
 
-    field :user, type: :user do
-      arg :id, non_null(:id)
-      resolve &Resolver.User.find/2
-    end
+  alias Ink.Resolver
+
+  object :user_queries do
   end
 
   input_object :update_user_params do
@@ -32,7 +26,7 @@ defmodule Ink.Schema.Types.User do
       arg :id, non_null(:integer)
       arg :user, :update_user_params
 
-      resolve &Resolver.User.update/2
+      resolve with_login(&Resolver.User.update/2)
     end
   end
 end
