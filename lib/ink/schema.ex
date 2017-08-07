@@ -9,7 +9,6 @@ defmodule Ink.Schema do
   query do
     import_fields :label_queries
     import_fields :post_queries
-    import_fields :user_queries
   end
 
   mutation do

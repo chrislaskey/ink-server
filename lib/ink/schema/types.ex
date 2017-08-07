@@ -14,6 +14,8 @@ defmodule Ink.Schema.Types do
     field :secret, :string
     field :title, :string
     field :body, :string
+    field :inserted_at, :string
+    field :updated_at, :string
     field :user, :user, resolve: assoc(:user)
     field :labels, list_of(:label), resolve: assoc(:labels)
   end
