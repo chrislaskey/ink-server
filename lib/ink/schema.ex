@@ -81,7 +81,8 @@ defmodule Ink.Schema do
 
     field :delete_post, type: :post do
       arg :uid, non_null(:string)
-      resolve &Resolver.Post.delete/2
+
+      resolve with_login(&Resolver.Post.delete/2)
     end
 
     field :create_post_label, type: :post do

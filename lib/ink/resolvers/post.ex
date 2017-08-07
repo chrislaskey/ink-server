@@ -50,8 +50,9 @@ defmodule Ink.Resolver.Post do
     |> Repo.update
   end
 
-  def delete(%{uid: uid}, _info) do
-    post = Repo.get_by!(Post, uid: uid)
+  def delete(%{uid: uid}, info) do
+    post = Repo.get_by!(Post, uid: uid, user_id: CurrentUser.id info)
+
     Repo.delete(post)
   end
 
