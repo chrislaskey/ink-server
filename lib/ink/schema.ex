@@ -110,7 +110,7 @@ defmodule Ink.Schema do
       arg :name, non_null(:string)
       arg :color, non_null(:string)
 
-      resolve &Resolver.Label.create/2
+      resolve with_login(&Resolver.Label.create/2)
     end
   end
 end

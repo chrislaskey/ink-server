@@ -14,9 +14,9 @@ defmodule Ink.Resolver.Label do
     {:ok, labels}
   end
 
-  def create(params, _info) do
+  def create(params, info) do
     %Label{}
-    |> Label.changeset(params)
+    |> Label.changeset(CurrentUser.add(params, info))
     |> Repo.insert
   end
 end

@@ -15,7 +15,7 @@ defmodule Ink.Label do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :user_id])
+    |> cast(params, [:color, :name, :user_id])
     |> validate_required([:name, :user_id])
   end
 end
