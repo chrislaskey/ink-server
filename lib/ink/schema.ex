@@ -1,47 +1,19 @@
 defmodule Ink.Schema do
   use Absinthe.Schema
-  import_types Ink.Schema.Types
 
-  alias Ink.CurrentUser
+  import_types Ink.Schema.Types
+  import_types Ink.Schema.Types.Label
+  import_types Ink.Schema.Types.Post
+  import_types Ink.Schema.Types.User
+
   alias Ink.Resolver
 
-  defp with_login(resolver) do
-    fn (params, info) ->
-      case CurrentUser.present?(info) do
-        false -> {:error, "Not Authorized"}
-        true -> resolver.(params, info)
-      end
-    end
-  end
+  import Ink.Request, only: [with_login: 1]
 
   query do
-    field :labels, list_of(:label) do
-      resolve with_login(&Resolver.Label.all/2)
-    end
-
-    field :posts, list_of(:post) do
-      resolve with_login(&Resolver.Post.all/2)
-    end
-
-    field :post, type: :post do
-      arg :uid, non_null(:string)
-      resolve with_login(&Resolver.Post.find/2)
-    end
-
-    field :public_post, type: :post do
-      arg :uid, non_null(:string)
-      arg :secret, non_null(:string)
-      resolve &Resolver.Post.find_by_secret/2
-    end
-
-    field :users, list_of(:user) do
-      resolve &Resolver.User.all/2
-    end
-
-    field :user, type: :user do
-      arg :id, non_null(:id)
-      resolve &Resolver.User.find/2
-    end
+    import_fields :label_queries
+    import_fields :post_queries
+    import_fields :user_queries
   end
 
   input_object :update_post_params do
