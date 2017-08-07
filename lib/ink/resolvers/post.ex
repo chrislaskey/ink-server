@@ -42,9 +42,11 @@ defmodule Ink.Resolver.Post do
     |> Repo.update
   end
 
-  def update(%{uid: uid, post: post_params}, _info) do
+  def update(%{uid: uid, post: post_params}, info) do
+    params = CurrentUser.add(post_params, info)
+
     Repo.get_by!(Post, uid: uid)
-    |> Post.update_changeset(post_params)
+    |> Post.update_changeset(params)
     |> Repo.update
   end
 

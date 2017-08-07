@@ -76,7 +76,7 @@ defmodule Ink.Schema do
       arg :uid, non_null(:string)
       arg :post, :update_post_params
 
-      resolve &Resolver.Post.update/2
+      resolve with_login(&Resolver.Post.update/2)
     end
 
     field :delete_post, type: :post do
