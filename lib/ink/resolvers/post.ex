@@ -2,21 +2,22 @@ defmodule Ink.Resolver.Post do
   import Ecto.Query, only: [where: 2]
 
   alias Ink.Repo
+  alias Ink.CurrentUser
   alias Ink.Post
   alias Ink.Post.Instance, as: PostInstance
   alias Ink.Label.Instance, as: LabelInstance
 
-  def all(params, _) do
+  def all(_params, info) do
     posts = Post
-      |> where(user_id: ^params[:user_id])
+      |> where(user_id: ^CurrentUser.id info)
       |> Repo.all
       |> Repo.preload([:labels])
 
     {:ok, posts}
   end
 
-  def find(%{uid: uid, user_id: user_id}, _) do
-    case Repo.get_by(Post, uid: uid, user_id: user_id) do
+  def find(%{uid: uid}, info) do
+    case Repo.get_by(Post, uid: uid, user_id: CurrentUser.id info) do
       nil -> {:error, "Post #{uid} not found"}
       post -> {:ok, post}
     end

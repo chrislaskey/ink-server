@@ -2,37 +2,30 @@ defmodule Ink.Schema do
   use Absinthe.Schema
   import_types Ink.Schema.Types
 
+  alias Ink.CurrentUser
   alias Ink.Resolver
 
-  defp add_user_id_to_params(params, %{context: %{current_user: %{id: id}}}), do: Map.put(params, :user_id, id)
-  defp add_user_id_to_params(params, _), do: Map.put(params, :user_id, nil)
-
-  defp current_user?(%{context: %{current_user: %{id: id}}}), do: true
-  defp current_user?(_), do: false
-
-  defp restrict(resolver) do
+  defp with_login(resolver) do
     fn (params, info) ->
-      case current_user?(info) do
+      case CurrentUser.present?(info) do
         false -> {:error, "Not Authorized"}
-        true -> params
-                |> add_user_id_to_params(info)
-                |> resolver.(info)
+        true -> resolver.(params, info)
       end
     end
   end
 
   query do
     field :labels, list_of(:label) do
-      resolve restrict &Resolver.Label.all/2
+      resolve with_login(&Resolver.Label.all/2)
     end
 
     field :posts, list_of(:post) do
-      resolve restrict &Resolver.Post.all/2
+      resolve with_login(&Resolver.Post.all/2)
     end
 
     field :post, type: :post do
       arg :uid, non_null(:string)
-      resolve restrict &Resolver.Post.find/2
+      resolve with_login(&Resolver.Post.find/2)
     end
 
     field :public_post, type: :post do

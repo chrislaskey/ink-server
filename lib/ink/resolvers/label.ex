@@ -2,11 +2,12 @@ defmodule Ink.Resolver.Label do
   import Ecto.Query, only: [where: 2]
 
   alias Ink.Repo
+  alias Ink.CurrentUser
   alias Ink.Label
 
-  def all(params, _info) do
+  def all(_params, info) do
     labels = Label
-      |> where(user_id: ^params[:user_id])
+      |> where(user_id: ^CurrentUser.id info)
       |> Repo.all
       |> Repo.preload([:posts])
 
