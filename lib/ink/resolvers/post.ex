@@ -56,12 +56,9 @@ defmodule Ink.Resolver.Post do
     Repo.delete(post)
   end
 
-  def add_label(
-    %{label_id: label_id, uid: uid},
-    %{context: %{current_user: %{id: user_id}}}
-  ) do
-    with {:ok, label} <- LabelInstance.owner?(label_id, user_id),
-         {:ok, post} <- PostInstance.owner?(uid, user_id) do
+  def add_label(%{label_id: label_id, uid: uid}, info) do
+    with {:ok, label} <- LabelInstance.owner?(label_id, CurrentUser.id info),
+         {:ok, post} <- PostInstance.owner?(uid, CurrentUser.id info) do
       params = %{
         labels: [ label | PostInstance.labels(post) ]
       }
@@ -75,12 +72,9 @@ defmodule Ink.Resolver.Post do
     end
   end
 
-  def remove_label(
-    %{label_id: label_id, uid: uid},
-    %{context: %{current_user: %{id: user_id}}}
-  ) do
-    with {:ok, label} <- LabelInstance.owner?(label_id, user_id),
-         {:ok, post} <- PostInstance.owner?(uid, user_id) do
+  def remove_label(%{label_id: label_id, uid: uid}, info) do
+    with {:ok, label} <- LabelInstance.owner?(label_id, CurrentUser.id info),
+         {:ok, post} <- PostInstance.owner?(uid, CurrentUser.id info) do
       params = %{
         labels: List.delete(PostInstance.labels(post), label)
       }
