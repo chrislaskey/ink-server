@@ -1,4 +1,4 @@
-defmodule Ink.Post do
+defmodule Ink.Note do
   use Ink.Web, :model
 
   schema "posts" do
@@ -17,7 +17,7 @@ defmodule Ink.Post do
   end
 
   def add_uid({:ok, struct}) do
-    %Ink.Post{id: id} = struct
+    %Ink.Note{id: id} = struct
     params = %{uid: Uid.encode(id)}
 
     uid_changeset(struct, params)

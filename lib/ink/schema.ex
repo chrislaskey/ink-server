@@ -3,7 +3,7 @@ defmodule Ink.Schema do
 
   import_types Ink.Schema.Types
   import_types Ink.Schema.Types.Label
-  import_types Ink.Schema.Types.Post
+  import_types Ink.Schema.Types.Note
   import_types Ink.Schema.Types.User
 
   query do

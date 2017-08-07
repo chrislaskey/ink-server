@@ -1,15 +1,15 @@
-defmodule Ink.Post.Instance do
+defmodule Ink.Note.Instance do
   alias Ink.Repo
-  alias Ink.Post
+  alias Ink.Note
 
   def owner?(uid, user_id) do
-    case Repo.get_by(Post, %{uid: uid, user_id: user_id}) do
-      nil -> {:error, "Post #{uid} not owned by user"}
+    case Repo.get_by(Note, %{uid: uid, user_id: user_id}) do
+      nil -> {:error, "Note #{uid} not owned by user"}
       post -> {:ok, post}
     end
   end
 
-  def labels(%Post{} = post) do
+  def labels(%Note{} = post) do
     Repo.preload(post, [:labels]).labels
   end
 end

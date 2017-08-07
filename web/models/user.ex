@@ -9,7 +9,7 @@ defmodule Ink.User do
     field :email, :string
     field :password, :string, virtual: true
     field :password_hash, :string
-    has_many :posts, Ink.Post
+    has_many :posts, Ink.Note
 
     timestamps()
   end

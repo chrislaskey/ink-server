@@ -1,4 +1,4 @@
-defmodule Ink.Schema.Types.Post do
+defmodule Ink.Schema.Types.Note do
   use Absinthe.Schema.Notation
 
   import Ink.Request, only: [with_login: 1]
@@ -9,16 +9,16 @@ defmodule Ink.Schema.Types.Post do
     field :public_post, type: :post do
       arg :uid, non_null(:string)
       arg :secret, non_null(:string)
-      resolve &Resolver.Post.find_by_secret/2
+      resolve &Resolver.Note.find_by_secret/2
     end
 
     field :posts, list_of(:post) do
-      resolve with_login(&Resolver.Post.all/2)
+      resolve with_login(&Resolver.Note.all/2)
     end
 
     field :post, type: :post do
       arg :uid, non_null(:string)
-      resolve with_login(&Resolver.Post.find/2)
+      resolve with_login(&Resolver.Note.find/2)
     end
   end
 
@@ -34,34 +34,34 @@ defmodule Ink.Schema.Types.Post do
       arg :body, non_null(:string)
       arg :user_id, non_null(:integer)
 
-      resolve with_login(&Resolver.Post.create/2)
+      resolve with_login(&Resolver.Note.create/2)
     end
 
     field :update_post, type: :post do
       arg :uid, non_null(:string)
       arg :post, :update_post_params
 
-      resolve with_login(&Resolver.Post.update/2)
+      resolve with_login(&Resolver.Note.update/2)
     end
 
     field :delete_post, type: :post do
       arg :uid, non_null(:string)
 
-      resolve with_login(&Resolver.Post.delete/2)
+      resolve with_login(&Resolver.Note.delete/2)
     end
 
     field :create_post_label, type: :post do
       arg :uid, non_null(:string)
       arg :label_id, non_null(:integer)
 
-      resolve with_login(&Resolver.Post.add_label/2)
+      resolve with_login(&Resolver.Note.add_label/2)
     end
 
     field :delete_post_label, type: :post do
       arg :uid, non_null(:string)
       arg :label_id, non_null(:integer)
 
-      resolve with_login(&Resolver.Post.remove_label/2)
+      resolve with_login(&Resolver.Note.remove_label/2)
     end
   end
 end
