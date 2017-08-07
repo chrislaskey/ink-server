@@ -30,9 +30,13 @@ defmodule Ink.Resolver.Post do
     end
   end
 
-  def create(params, _info) do
+  def create(params, info) do
+    params = params
+             |> CurrentUser.add(info)
+             |> Post.add_secret
+
     %Post{}
-    |> Post.changeset(Post.add_secret(params))
+    |> Post.changeset(params)
     |> Repo.insert
     |> Post.add_uid
     |> Repo.update

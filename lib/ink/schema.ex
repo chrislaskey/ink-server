@@ -69,7 +69,7 @@ defmodule Ink.Schema do
       arg :body, non_null(:string)
       arg :user_id, non_null(:integer)
 
-      resolve &Resolver.Post.create/2
+      resolve with_login(&Resolver.Post.create/2)
     end
 
     field :update_post, type: :post do
