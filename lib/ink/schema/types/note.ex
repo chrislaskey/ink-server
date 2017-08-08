@@ -4,11 +4,12 @@ defmodule Ink.Schema.Types.Note do
   import Ink.Request, only: [with_login: 1]
 
   alias Ink.Resolver
-  
+
   object :note_queries do
     field :public_note, type: :note do
       arg :uid, non_null(:string)
       arg :secret, non_null(:string)
+
       resolve &Resolver.Note.find_by_secret/2
     end
 
@@ -18,6 +19,7 @@ defmodule Ink.Schema.Types.Note do
 
     field :note, type: :note do
       arg :uid, non_null(:string)
+
       resolve with_login(&Resolver.Note.find/2)
     end
   end
@@ -25,14 +27,12 @@ defmodule Ink.Schema.Types.Note do
   input_object :update_note_params do
     field :title, non_null(:string)
     field :body, non_null(:string)
-    field :user_id, non_null(:integer)
   end
 
   object :note_mutations do
     field :create_note, type: :note do
       arg :title, non_null(:string)
       arg :body, non_null(:string)
-      arg :user_id, non_null(:integer)
 
       resolve with_login(&Resolver.Note.create/2)
     end

@@ -9,6 +9,17 @@ defmodule Ink.Schema.Types.Label do
     field :labels, list_of(:label) do
       resolve with_login(&Resolver.Label.all/2)
     end
+
+    field :label, type: :label do
+      arg :id, non_null(:string)
+
+      resolve with_login(&Resolver.Label.find/2)
+    end
+  end
+
+  input_object :update_label_params do
+    field :color, non_null(:string)
+    field :name, non_null(:string)
   end
 
   object :label_mutations do
@@ -17,6 +28,19 @@ defmodule Ink.Schema.Types.Label do
       arg :color, non_null(:string)
 
       resolve with_login(&Resolver.Label.create/2)
+    end
+
+    field :update_label, type: :label do
+      arg :id, non_null(:string)
+      arg :label, :update_label_params
+
+      resolve with_login(&Resolver.Label.update/2)
+    end
+
+    field :delete_label, type: :label do
+      arg :id, non_null(:string)
+
+      resolve with_login(&Resolver.Label.delete/2)
     end
   end
 end

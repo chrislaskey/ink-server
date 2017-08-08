@@ -45,7 +45,7 @@ defmodule Ink.Resolver.Note do
   def update(%{uid: uid, note: note_params}, info) do
     params = CurrentUser.add(note_params, info)
 
-    Repo.get_by!(Note, uid: uid)
+    Repo.get_by!(Note, uid: uid, user_id: CurrentUser.id info)
     |> Note.update_changeset(params)
     |> Repo.update
   end
