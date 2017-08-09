@@ -7,6 +7,7 @@ defmodule Ink.Schema.Types do
     field :name, :string
     field :color, :string
     field :user, :user, resolve: assoc(:user)
+    field :notes, list_of(:note), resolve: assoc(:notes)
   end
 
   object :note do
