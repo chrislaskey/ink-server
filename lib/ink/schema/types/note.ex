@@ -17,6 +17,12 @@ defmodule Ink.Schema.Types.Note do
       resolve with_login(&Resolver.Note.all/2)
     end
 
+    field :search_notes, list_of(:note) do
+      arg :search, :string
+
+      resolve with_login(&Resolver.Note.search/2)
+    end
+
     field :note, type: :note do
       arg :uid, non_null(:string)
 

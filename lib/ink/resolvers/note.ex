@@ -1,5 +1,5 @@
 defmodule Ink.Resolver.Note do
-  import Ecto.Query, only: [where: 2]
+  import Ecto.Query, only: [from: 2, where: 2]
 
   alias Ink.Repo
   alias Ink.CurrentUser
@@ -11,6 +11,23 @@ defmodule Ink.Resolver.Note do
     notes = Note
       |> where(user_id: ^CurrentUser.id info)
       |> Repo.all
+      |> Repo.preload([:labels])
+
+    {:ok, notes}
+  end
+
+  def search(params, info) when params == %{}, do: all(%{}, info)
+  def search(%{search: search}, info) when is_nil(search), do: all(%{}, info)
+  def search(%{search: search}, info) when search == "", do: all(%{}, info)
+  def search(%{search: search}, info) do
+    notes = Repo.all(
+        from n in Note,
+        where: [user_id: ^CurrentUser.id info],
+        where: (
+          ilike(n.title, ^"%#{search}%") or
+          ilike(n.body, ^"%#{search}%")
+        )
+      )
       |> Repo.preload([:labels])
 
     {:ok, notes}
