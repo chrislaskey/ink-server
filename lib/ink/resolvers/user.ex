@@ -26,8 +26,8 @@ defmodule Ink.Resolver.User do
   end
 
   def log_in_with_provider(params, _info) do
-    with {:ok, user_data} <- get_provider_user(params),
-         {:ok, user} <- UserInstance.find_or_create_by(user_data),
+    with {:ok, data} <- get_provider_data(params),
+         {:ok, user} <- UserInstance.find_or_create_by(data[:user]),
          {:ok, jwt, %{"exp" => expires}} <- Guardian.encode_and_sign(user, :access) do
       {:ok, %{token: jwt, token_expiration: expires, user: user}}
     else
@@ -35,14 +35,14 @@ defmodule Ink.Resolver.User do
     end
   end
 
-  defp get_provider_user(%{code: code, provider: provider, redirect_uri: redirect_uri}) do
+  defp get_provider_data(%{code: code, provider: provider, redirect_uri: redirect_uri}) do
     case provider do
-      "facebook" -> get_facebook_user(code, redirect_uri)
+      "facebook" -> get_facebook_data(code, redirect_uri)
       _ -> {:error, "Provider #{provider} not supported"}
     end
   end
 
-  defp get_facebook_user(code, redirect_uri) do
+  defp get_facebook_data(code, redirect_uri) do
     try do
       client = OAuth2.Provider.Facebook.get_token!([code: code], [redirect_uri: redirect_uri])
       token = client.token
@@ -51,7 +51,7 @@ defmodule Ink.Resolver.User do
 
       case token.access_token do
         nil -> {:error, "Error fetching facebook token: " <> token.other_params["error_description"]}
-        _ -> get_facebook_user_details(client)
+        _ -> get_facebook_user(client)
       end
     rescue
       error in ArgumentError -> Logger.error inspect(error)
@@ -59,19 +59,32 @@ defmodule Ink.Resolver.User do
     end
   end
 
-  defp get_facebook_user_details(client) do
+  defp get_facebook_user(client) do
     case OAuth2.Provider.Facebook.get_user(client) do
       {:error, response} -> {:error, response}
-      {:ok, user} ->
-        {:ok, %{
-          provider_name: :facebook,
-          provider_id: user["id"],
-          locale: user["locale"],
-          email: user["email"],
-          first_name: user["first_name"],
-          last_name: user["last_name"],
-          name: user["name"]
-        }}
+      {:ok, user} -> {:ok, facebook_user(client, user)}
     end
+  end
+
+  defp facebook_user(client, user) do
+    Logger.debug "Facebook user: " <> inspect(user)
+
+    %{
+      provider: %{
+        name: :facebook,
+        id: user["id"],
+        client_id: client.client_id,
+        access_token: client.token.access_token,
+        expires_at: client.token.expires_at,
+        refresh_token: client.token.refresh_token
+      },
+      user: %{
+        locale: user["locale"],
+        email: user["email"],
+        first_name: user["first_name"],
+        last_name: user["last_name"],
+        name: user["name"]
+      }
+    }
   end
 end

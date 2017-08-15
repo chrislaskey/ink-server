@@ -6,6 +6,9 @@ defmodule Ink.User do
 
   schema "users" do
     field :name, :string
+    field :first_name, :string
+    field :last_name, :string
+    field :locale, :string
     field :email, :string
     field :password, :string, virtual: true
     field :password_hash, :string
@@ -19,7 +22,7 @@ defmodule Ink.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :email])
+    |> cast(params, [:name, :email, :first_name, :last_name, :locale])
     |> validate_required([:name, :email])
   end
 

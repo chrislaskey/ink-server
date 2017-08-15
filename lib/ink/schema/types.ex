@@ -30,7 +30,10 @@ defmodule Ink.Schema.Types do
   object :user do
     field :id, :id
     field :name, :string
+    field :first_name, :string
+    field :last_name, :string
     field :email, :string
+    field :locale, :string
     field :notes, list_of(:note), resolve: assoc(:notes)
   end
 end

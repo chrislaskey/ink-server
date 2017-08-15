@@ -4,11 +4,12 @@ defmodule Ink.Repo.Migrations.CreateUser do
   def change do
     create table(:users) do
       add :name, :string
+      add :first_name, :string
+      add :last_name, :string
       add :email, :string
       add :password_hash, :string
-
+      add :locale, :string
       timestamps()
     end
-
   end
 end
