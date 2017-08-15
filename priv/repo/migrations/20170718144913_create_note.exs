@@ -8,7 +8,6 @@ defmodule Ink.Repo.Migrations.CreateNote do
       add :title, :string
       add :body, :text
       add :user_id, references(:users, on_delete: :nothing)
-
       timestamps()
     end
 

@@ -11,5 +11,7 @@ defmodule Ink.Repo.Migrations.CreateUser do
       add :locale, :string
       timestamps()
     end
+
+    create unique_index(:users, [:email])
   end
 end

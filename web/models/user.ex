@@ -13,7 +13,7 @@ defmodule Ink.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     has_many :notes, Ink.Note
-
+    has_many :user_providers, Ink.UserProvider
     timestamps()
   end
 
