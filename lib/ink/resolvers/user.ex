@@ -15,10 +15,12 @@ defmodule Ink.Resolver.User do
     end
   end
 
-  def login(params, _info) do
+  def log_in(params, _info) do
     with {:ok, user} <- Session.authenticate(params, Repo),
          {:ok, jwt, %{"exp" => expires}} <- Guardian.encode_and_sign(user, :access) do
       {:ok, %{token: jwt, token_expiration: expires, user: user}}
+    else
+      {:error, reason} -> {:error, reason}
     end
   end
 

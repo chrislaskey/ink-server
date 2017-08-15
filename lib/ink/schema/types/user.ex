@@ -24,7 +24,7 @@ defmodule Ink.Schema.Types.User do
       arg :email, non_null(:string)
       arg :password, non_null(:string)
 
-      resolve &Resolver.User.login/2
+      resolve &Resolver.User.log_in/2
     end
 
     field :update_user, type: :user do
