@@ -19,7 +19,7 @@ defmodule Ink.Mixfile do
   def application do
     [mod: {Ink, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :oauth2_facebook]]
   end
 
   # Specifies which paths to compile per environment.
@@ -46,6 +46,7 @@ defmodule Ink.Mixfile do
      {:faker, "~> 0.7"},
      {:comeonin, "~> 2.5"},
      {:guardian, "~> 0.14.4"},
+     {:oauth2_facebook, "~> 0.1"},
      {:hashids, "~> 2.0"}]
   end
 
