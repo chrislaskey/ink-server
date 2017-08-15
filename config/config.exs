@@ -32,7 +32,8 @@ config :guardian, Guardian,
   secret_key: System.get_env("GUARDIAN_SECRET_KEY"),
   serializer: Ink.Guardian.Serializer
 
-config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+# OAuth2 Facebook
+config :oauth2_facebook, OAuth2.Provider.Facebook,
   client_id: System.get_env("FACEBOOK_APP_ID"),
   client_secret: System.get_env("FACEBOOK_APP_SECRET")
 
