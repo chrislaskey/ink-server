@@ -4,6 +4,7 @@ defmodule Ink.Label do
   schema "labels" do
     field :name, :string
     field :color, :string
+    field :note_count, :integer, virtual: true
     belongs_to :user, Ink.User
     many_to_many :notes, Ink.Note, join_through: "labels_notes"
 

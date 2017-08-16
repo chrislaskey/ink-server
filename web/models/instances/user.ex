@@ -5,8 +5,8 @@ defmodule Ink.User.Instance do
 
   def find_or_create_by_provider(user_params, provider_params) do
     case UserProviderInstance.find_user(provider_params) do
-      user -> {:ok, user}
       nil -> create_by(user_params)
+      user -> {:ok, user}
     end
   end
 
