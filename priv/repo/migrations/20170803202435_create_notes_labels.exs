@@ -6,5 +6,7 @@ defmodule Ink.Repo.Migrations.CreateNotesLabels do
       add :label_id, references(:labels)
       add :note_id, references(:notes)
     end
+
+    create unique_index(:labels_notes, [:label_id, :note_id])
   end
 end

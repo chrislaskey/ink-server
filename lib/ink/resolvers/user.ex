@@ -5,9 +5,7 @@ defmodule Ink.Resolver.User do
   alias Ink.CurrentUser
   alias Ink.Session
   alias Ink.User
-
   alias Ink.LogIn.Facebook
-
   alias Ink.User.Instance, as: UserInstance
   alias Ink.UserProvider.Instance, as: UserProviderInstance
 
