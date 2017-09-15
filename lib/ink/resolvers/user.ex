@@ -6,6 +6,7 @@ defmodule Ink.Resolver.User do
   alias Ink.Session
   alias Ink.User
   alias Ink.LogIn.Facebook
+  alias Ink.LogIn.GitHub
   alias Ink.User.Instance, as: UserInstance
   alias Ink.UserProvider.Instance, as: UserProviderInstance
 
@@ -42,6 +43,7 @@ defmodule Ink.Resolver.User do
   defp get_provider_data(%{code: code, provider: provider, redirect_uri: redirect_uri}) do
     case provider do
       "facebook" -> Facebook.fetch(code, redirect_uri)
+      "github" -> GitHub.fetch(code, redirect_uri)
       _ -> {:error, "Provider #{provider} not supported"}
     end
   end

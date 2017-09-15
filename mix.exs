@@ -17,9 +17,21 @@ defmodule Ink.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Ink, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :oauth2_facebook]]
+    [
+      mod: {Ink, []},
+      applications: [
+        :phoenix,
+        :phoenix_pubsub,
+        :phoenix_html,
+        :cowboy,
+        :logger,
+        :gettext,
+        :phoenix_ecto,
+        :postgrex,
+        :oauth2_facebook,
+        :oauth2_github
+      ]
+    ]
   end
 
   # Specifies which paths to compile per environment.
@@ -47,6 +59,7 @@ defmodule Ink.Mixfile do
      {:comeonin, "~> 2.5"},
      {:guardian, "~> 0.14.4"},
      {:oauth2_facebook, "~> 0.1"},
+     {:oauth2_github, "~> 0.1"},
      {:hashids, "~> 2.0"}]
   end
 
