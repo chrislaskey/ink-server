@@ -1,5 +1,5 @@
 defmodule InkServer.User do
-  use InkServer.Web, :model
+  use InkServer.Schema
 
   alias Ecto.Changeset
   alias Comeonin.Bcrypt

@@ -1,5 +1,5 @@
 defmodule InkServer.Note do
-  use InkServer.Web, :model
+  use InkServer.Schema
 
   schema "notes" do
     field :uid, :string

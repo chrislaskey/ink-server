@@ -1,5 +1,5 @@
 defmodule InkServer.Session do
-  alias InkServer.User
+  use InkServer.Schema
 
   def authenticate(params, repo) do
     user = repo.get_by(User, email: String.downcase(params.email))

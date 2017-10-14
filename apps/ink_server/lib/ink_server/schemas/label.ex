@@ -1,5 +1,5 @@
 defmodule InkServer.Label do
-  use InkServer.Web, :model
+  use InkServer.Schema
 
   schema "labels" do
     field :name, :string

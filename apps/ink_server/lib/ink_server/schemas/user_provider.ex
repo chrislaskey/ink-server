@@ -1,5 +1,5 @@
 defmodule InkServer.UserProvider do
-  use InkServer.Web, :model
+  use InkServer.Schema
 
   schema "user_providers" do
     field :type, :string
