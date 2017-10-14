@@ -1,12 +1,12 @@
 defmodule InkApi.Resolver.User do
   require Logger
 
-  alias InkApi.Repo
   alias InkApi.CurrentUser
-  alias InkApi.Session
-  alias InkApi.User
-  alias InkApi.User.Instance, as: UserInstance
-  alias InkApi.UserProvider.Instance, as: UserProviderInstance
+  alias InkServer.Repo
+  alias InkServer.Session
+  alias InkServer.User
+  alias InkServer.User.Instance, as: UserInstance
+  alias InkServer.UserProvider.Instance, as: UserProviderInstance
 
   def update(%{id: id, user: user_params}, info) do
     case id == CurrentUser.id(info) do

@@ -1,11 +1,11 @@
 defmodule InkApi.Resolver.Note do
   import Ecto.Query, only: [from: 2, where: 2]
 
-  alias InkApi.Repo
   alias InkApi.CurrentUser
-  alias InkApi.Note
-  alias InkApi.Note.Instance, as: NoteInstance
-  alias InkApi.Label.Instance, as: LabelInstance
+  alias InkServer.Repo
+  alias InkServer.Note
+  alias InkServer.Note.Instance, as: NoteInstance
+  alias InkServer.Label.Instance, as: LabelInstance
 
   def all(_params, info) do
     notes = Note

@@ -1,10 +1,10 @@
 defmodule InkApi.Resolver.Label do
   import Ecto.Query, only: [where: 2]
 
-  alias InkApi.Repo
   alias InkApi.CurrentUser
-  alias InkApi.Label
-  alias InkApi.Label.Instance, as: LabelInstance
+  alias InkServer.Repo
+  alias InkServer.Label
+  alias InkServer.Label.Instance, as: LabelInstance
 
   def all(_params, info) do
     labels = Label
