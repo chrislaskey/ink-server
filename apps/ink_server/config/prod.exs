@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :ink, InkServer.Repo,
+config :ink_server, InkServer.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: System.get_env("INK_SERVER_POSTGRES_USER"),
   password: System.get_env("INK_SERVER_POSTGRES_PASS"),

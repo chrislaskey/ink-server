@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :ink, InkServer.Repo,
+config :ink_server, InkServer.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "",
