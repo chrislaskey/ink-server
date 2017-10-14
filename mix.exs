@@ -1,4 +1,4 @@
-defmodule InkServer.Mixfile do
+defmodule Ink.Mixfile do
   use Mix.Project
 
   def project do
