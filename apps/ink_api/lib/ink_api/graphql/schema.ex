@@ -1,10 +1,10 @@
-defmodule InkApi.Schema do
+defmodule InkApi.GraphQL.Schema do
   use Absinthe.Schema
 
-  import_types InkApi.Schema.Types
-  import_types InkApi.Schema.Types.Label
-  import_types InkApi.Schema.Types.Note
-  import_types InkApi.Schema.Types.User
+  import_types InkApi.GraphQL.Schema.Types
+  import_types InkApi.GraphQL.Schema.Types.Label
+  import_types InkApi.GraphQL.Schema.Types.Note
+  import_types InkApi.GraphQL.Schema.Types.User
 
   query do
     import_fields :label_queries

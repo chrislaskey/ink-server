@@ -10,12 +10,12 @@ defmodule InkApi.Router do
 
   if Application.get_env(:ink_api, :graphiql, false), do:
     forward "/graphiql", Absinthe.Plug.GraphiQL,
-      schema: InkApi.Schema
+      schema: InkApi.GraphQL.Schema
 
   scope "/" do
     pipe_through :graphql
 
     forward "/", Absinthe.Plug,
-      schema: InkApi.Schema
+      schema: InkApi.GraphQL.Schema
   end
 end

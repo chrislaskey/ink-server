@@ -1,4 +1,4 @@
-defmodule InkApi.Resolver.User do
+defmodule InkApi.GraphQL.Resolver.User do
   require Logger
 
   alias InkApi.CurrentUser

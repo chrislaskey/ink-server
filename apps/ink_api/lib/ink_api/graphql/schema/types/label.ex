@@ -1,9 +1,9 @@
-defmodule InkApi.Schema.Types.Label do
+defmodule InkApi.GraphQL.Schema.Types.Label do
   use Absinthe.Schema.Notation
   
   import InkApi.Request, only: [with_login: 1]
 
-  alias InkApi.Resolver
+  alias InkApi.GraphQL.Resolver
   
   object :label_queries do
     field :labels, list_of(:label) do

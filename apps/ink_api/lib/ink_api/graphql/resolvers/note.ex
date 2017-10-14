@@ -1,4 +1,4 @@
-defmodule InkApi.Resolver.Note do
+defmodule InkApi.GraphQL.Resolver.Note do
   import Ecto.Query, only: [from: 2, where: 2]
 
   alias InkApi.CurrentUser

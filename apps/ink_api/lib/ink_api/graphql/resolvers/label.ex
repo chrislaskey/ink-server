@@ -1,4 +1,4 @@
-defmodule InkApi.Resolver.Label do
+defmodule InkApi.GraphQL.Resolver.Label do
   import Ecto.Query, only: [where: 2]
 
   alias InkApi.CurrentUser

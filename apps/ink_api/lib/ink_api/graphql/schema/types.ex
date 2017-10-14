@@ -1,4 +1,4 @@
-defmodule InkApi.Schema.Types do
+defmodule InkApi.GraphQL.Schema.Types do
   use Absinthe.Schema.Notation
   use Absinthe.Ecto, repo: InkApi.Repo
 

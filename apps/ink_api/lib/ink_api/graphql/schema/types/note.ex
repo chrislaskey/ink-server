@@ -1,9 +1,9 @@
-defmodule InkApi.Schema.Types.Note do
+defmodule InkApi.GraphQL.Schema.Types.Note do
   use Absinthe.Schema.Notation
 
   import InkApi.Request, only: [with_login: 1]
 
-  alias InkApi.Resolver
+  alias InkApi.GraphQL.Resolver
 
   object :note_queries do
     field :public_note, type: :note do

@@ -1,9 +1,9 @@
-defmodule InkApi.Schema.Types.User do
+defmodule InkApi.GraphQL.Schema.Types.User do
   use Absinthe.Schema.Notation
 
   import InkApi.Request, only: [with_login: 1]
 
-  alias InkApi.Resolver
+  alias InkApi.GraphQL.Resolver
 
   input_object :update_user_params do
     field :name, :string
@@ -12,7 +12,7 @@ defmodule InkApi.Schema.Types.User do
   end
 
   object :user_mutations do
-    field :login, type: :session do
+    field :logIn, type: :session do
       arg :email, non_null(:string)
       arg :password, non_null(:string)
 
