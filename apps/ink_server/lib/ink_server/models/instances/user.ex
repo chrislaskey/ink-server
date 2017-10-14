@@ -1,7 +1,7 @@
-defmodule Ink.User.Instance do
-  alias Ink.Repo
-  alias Ink.User
-  alias Ink.UserProvider.Instance, as: UserProviderInstance
+defmodule InkServer.User.Instance do
+  alias InkServer.Repo
+  alias InkServer.User
+  alias InkServer.UserProvider.Instance, as: UserProviderInstance
 
   def find_or_create_by_provider(user_params, provider_params) do
     case UserProviderInstance.find_user(provider_params) do

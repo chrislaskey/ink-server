@@ -1,6 +1,6 @@
-defmodule Ink.Note.Instance do
-  alias Ink.Repo
-  alias Ink.Note
+defmodule InkServer.Note.Instance do
+  alias InkServer.Repo
+  alias InkServer.Note
 
   def owner?(uid, user_id) do
     case Repo.get_by(Note, %{uid: uid, user_id: user_id}) do

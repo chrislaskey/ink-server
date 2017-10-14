@@ -1,12 +1,12 @@
-defmodule Ink.Label do
-  use Ink.Web, :model
+defmodule InkServer.Label do
+  use InkServer.Web, :model
 
   schema "labels" do
     field :name, :string
     field :color, :string
     field :note_count, :integer, virtual: true
-    belongs_to :user, Ink.User
-    many_to_many :notes, Ink.Note, join_through: "labels_notes"
+    belongs_to :user, InkServer.User
+    many_to_many :notes, InkServer.Note, join_through: "labels_notes"
 
     timestamps()
   end

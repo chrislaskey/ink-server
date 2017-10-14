@@ -1,4 +1,4 @@
-defmodule Ink.LogIn.GitHub do
+defmodule InkServer.LogIn.GitHub do
   require Logger
 
   def fetch(code, redirect_uri),

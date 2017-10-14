@@ -1,5 +1,5 @@
-defmodule Ink.UserProvider do
-  use Ink.Web, :model
+defmodule InkServer.UserProvider do
+  use InkServer.Web, :model
 
   schema "user_providers" do
     field :type, :string
@@ -8,7 +8,7 @@ defmodule Ink.UserProvider do
     field :access_token, :string
     field :expires_at, :integer
     field :refresh_token, :string
-    belongs_to :user, Ink.User
+    belongs_to :user, InkServer.User
     timestamps()
   end
 

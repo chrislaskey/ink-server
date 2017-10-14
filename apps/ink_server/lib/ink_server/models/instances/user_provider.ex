@@ -1,6 +1,6 @@
-defmodule Ink.UserProvider.Instance do
-  alias Ink.Repo
-  alias Ink.UserProvider
+defmodule InkServer.UserProvider.Instance do
+  alias InkServer.Repo
+  alias InkServer.UserProvider
 
   def find_user(%{provider_id: provider_id, type: type}) do
     case Repo.get_by(UserProvider, provider_id: provider_id, type: type) do

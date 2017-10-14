@@ -1,5 +1,5 @@
-defmodule Ink.Request do
-  alias Ink.CurrentUser
+defmodule InkApi.Request do
+  alias InkApi.CurrentUser
 
   def with_login(resolver) do
     fn (params, info) ->

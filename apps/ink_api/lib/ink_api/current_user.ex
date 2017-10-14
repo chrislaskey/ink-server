@@ -1,4 +1,4 @@
-defmodule Ink.CurrentUser do
+defmodule InkApi.CurrentUser do
   def present?(%{context: %{current_user: %{id: _id}}}), do: true
   def present?(_), do: false
 

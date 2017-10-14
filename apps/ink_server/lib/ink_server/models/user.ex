@@ -1,5 +1,5 @@
-defmodule Ink.User do
-  use Ink.Web, :model
+defmodule InkServer.User do
+  use InkServer.Web, :model
 
   alias Ecto.Changeset
   alias Comeonin.Bcrypt
@@ -12,8 +12,8 @@ defmodule Ink.User do
     field :email, :string
     field :password, :string, virtual: true
     field :password_hash, :string
-    has_many :notes, Ink.Note
-    has_many :user_providers, Ink.UserProvider
+    has_many :notes, InkServer.Note
+    has_many :user_providers, InkServer.UserProvider
     timestamps()
   end
 

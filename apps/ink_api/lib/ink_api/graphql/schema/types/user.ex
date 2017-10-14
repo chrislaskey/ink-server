@@ -1,9 +1,9 @@
-defmodule Ink.Schema.Types.User do
+defmodule InkApi.Schema.Types.User do
   use Absinthe.Schema.Notation
 
-  import Ink.Request, only: [with_login: 1]
+  import InkApi.Request, only: [with_login: 1]
 
-  alias Ink.Resolver
+  alias InkApi.Resolver
 
   input_object :update_user_params do
     field :name, :string

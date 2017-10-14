@@ -1,8 +1,8 @@
-defmodule Ink.Label.Instance do
+defmodule InkServer.Label.Instance do
   import Ecto.Query, only: [from: 2]
 
-  alias Ink.Repo
-  alias Ink.Label
+  alias InkServer.Repo
+  alias InkServer.Label
 
   def owner?(id, user_id) do
     case Repo.get_by(Label, %{id: id, user_id: user_id}) do

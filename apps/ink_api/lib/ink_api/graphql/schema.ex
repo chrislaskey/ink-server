@@ -1,10 +1,10 @@
-defmodule Ink.Schema do
+defmodule InkApi.Schema do
   use Absinthe.Schema
 
-  import_types Ink.Schema.Types
-  import_types Ink.Schema.Types.Label
-  import_types Ink.Schema.Types.Note
-  import_types Ink.Schema.Types.User
+  import_types InkApi.Schema.Types
+  import_types InkApi.Schema.Types.Label
+  import_types InkApi.Schema.Types.Note
+  import_types InkApi.Schema.Types.User
 
   query do
     import_fields :label_queries

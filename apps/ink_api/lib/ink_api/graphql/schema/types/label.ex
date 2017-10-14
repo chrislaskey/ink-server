@@ -1,9 +1,9 @@
-defmodule Ink.Schema.Types.Label do
+defmodule InkApi.Schema.Types.Label do
   use Absinthe.Schema.Notation
   
-  import Ink.Request, only: [with_login: 1]
+  import InkApi.Request, only: [with_login: 1]
 
-  alias Ink.Resolver
+  alias InkApi.Resolver
   
   object :label_queries do
     field :labels, list_of(:label) do

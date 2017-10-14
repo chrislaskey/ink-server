@@ -1,13 +1,13 @@
-defmodule Ink.Note do
-  use Ink.Web, :model
+defmodule InkServer.Note do
+  use InkServer.Web, :model
 
   schema "notes" do
     field :uid, :string
     field :secret, :string
     field :title, :string
     field :body, :string
-    belongs_to :user, Ink.User
-    many_to_many :labels, Ink.Label, join_through: "labels_notes", on_replace: :delete
+    belongs_to :user, InkServer.User
+    many_to_many :labels, InkServer.Label, join_through: "labels_notes", on_replace: :delete
 
     timestamps()
   end
@@ -17,7 +17,7 @@ defmodule Ink.Note do
   end
 
   def add_uid({:ok, struct}) do
-    %Ink.Note{id: id} = struct
+    %InkServer.Note{id: id} = struct
     params = %{uid: Uid.encode(id)}
 
     uid_changeset(struct, params)

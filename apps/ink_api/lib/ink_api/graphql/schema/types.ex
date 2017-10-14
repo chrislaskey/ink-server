@@ -1,6 +1,6 @@
-defmodule Ink.Schema.Types do
+defmodule InkApi.Schema.Types do
   use Absinthe.Schema.Notation
-  use Absinthe.Ecto, repo: Ink.Repo
+  use Absinthe.Ecto, repo: InkApi.Repo
 
   object :label do
     field :id, :id

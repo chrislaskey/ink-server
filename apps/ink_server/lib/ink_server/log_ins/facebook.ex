@@ -1,4 +1,4 @@
-defmodule Ink.LogIn.Facebook do
+defmodule InkServer.LogIn.Facebook do
   require Logger
 
   def fetch(code, redirect_uri),
