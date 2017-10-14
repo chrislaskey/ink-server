@@ -4,13 +4,12 @@ defmodule InkApi.Resolver.Label do
   alias InkApi.CurrentUser
   alias InkServer.Repo
   alias InkServer.Label
-  alias InkServer.Label.Instance, as: LabelInstance
 
   def all(_params, info) do
     labels = Label
       |> where(user_id: ^CurrentUser.id info)
       |> Repo.all
-      |> LabelInstance.add_counts
+      |> Label.add_counts
 
     {:ok, labels}
   end
@@ -18,7 +17,7 @@ defmodule InkApi.Resolver.Label do
   def find(%{id: id}, info) do
     case Repo.get_by(Label, id: id, user_id: CurrentUser.id info) do
       nil -> {:error, "Label #{id} not found"}
-      label -> {:ok, LabelInstance.add_count(label)}
+      label -> {:ok, Label.add_count(label)}
     end
   end
 

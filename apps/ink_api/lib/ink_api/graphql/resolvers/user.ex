@@ -5,8 +5,6 @@ defmodule InkApi.Resolver.User do
   alias InkServer.Repo
   alias InkServer.Session
   alias InkServer.User
-  alias InkServer.User.Instance, as: UserInstance
-  alias InkServer.UserProvider.Instance, as: UserProviderInstance
 
   def update(%{id: id, user: user_params}, info) do
     case id == CurrentUser.id(info) do

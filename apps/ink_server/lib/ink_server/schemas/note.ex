@@ -23,9 +23,8 @@ defmodule InkServer.Note do
     uid_changeset(struct, params)
   end
 
-  @doc """
-  Builds a changeset based on the `struct` and `params`.
-  """
+  # Changesets
+
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:title, :body, :user_id, :secret])
@@ -48,5 +47,18 @@ defmodule InkServer.Note do
     struct
     |> cast(params, [:title, :body, :user_id])
     |> put_assoc(:labels, params[:labels])
+  end
+
+  # Queries
+
+  def owner?(uid, user_id) do
+    case Repo.get_by(Note, %{uid: uid, user_id: user_id}) do
+      nil -> {:error, "Note #{uid} not owned by user"}
+      note -> {:ok, note}
+    end
+  end
+
+  def labels(%Note{} = note) do
+    Repo.preload(note, [:labels]).labels
   end
 end

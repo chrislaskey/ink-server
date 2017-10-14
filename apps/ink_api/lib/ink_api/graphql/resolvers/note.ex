@@ -3,9 +3,8 @@ defmodule InkApi.Resolver.Note do
 
   alias InkApi.CurrentUser
   alias InkServer.Repo
+  alias InkServer.Label
   alias InkServer.Note
-  alias InkServer.Note.Instance, as: NoteInstance
-  alias InkServer.Label.Instance, as: LabelInstance
 
   def all(_params, info) do
     notes = Note
@@ -74,10 +73,10 @@ defmodule InkApi.Resolver.Note do
   end
 
   def add_label(%{label_id: label_id, uid: uid}, info) do
-    with {:ok, label} <- LabelInstance.owner?(label_id, CurrentUser.id info),
-         {:ok, note} <- NoteInstance.owner?(uid, CurrentUser.id info) do
+    with {:ok, label} <- Label.owner?(label_id, CurrentUser.id info),
+         {:ok, note} <- Note.owner?(uid, CurrentUser.id info) do
       params = %{
-        labels: [ label | NoteInstance.labels(note) ]
+        labels: [ label | Note.labels(note) ]
       }
 
       note
@@ -90,10 +89,10 @@ defmodule InkApi.Resolver.Note do
   end
 
   def remove_label(%{label_id: label_id, uid: uid}, info) do
-    with {:ok, label} <- LabelInstance.owner?(label_id, CurrentUser.id info),
-         {:ok, note} <- NoteInstance.owner?(uid, CurrentUser.id info) do
+    with {:ok, label} <- Label.owner?(label_id, CurrentUser.id info),
+         {:ok, note} <- Note.owner?(uid, CurrentUser.id info) do
       params = %{
-        labels: List.delete(NoteInstance.labels(note), label)
+        labels: List.delete(Note.labels(note), label)
       }
 
       note

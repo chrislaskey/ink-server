@@ -3,6 +3,7 @@ defmodule InkServer.User do
 
   alias Ecto.Changeset
   alias Comeonin.Bcrypt
+  alias InkServer.User
 
   schema "users" do
     field :name, :string
@@ -13,13 +14,11 @@ defmodule InkServer.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     has_many :notes, InkServer.Note
-    has_many :user_providers, InkServer.UserProvider
     timestamps()
   end
 
-  @doc """
-  Builds a changeset based on the `struct` and `params`.
-  """
+  # Changesets
+
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:name, :email, :first_name, :last_name, :locale])
@@ -48,5 +47,13 @@ defmodule InkServer.User do
       _ ->
         changeset
     end
+  end
+
+  # Mutations
+
+  def create(params) do
+    %User{}
+    |> User.changeset(params)
+    |> Repo.insert
   end
 end
