@@ -4,7 +4,7 @@ defmodule Uid do
   @coder Hashids.new([
     alphabet: @characters,
     min_len: 3,
-    # salt: System.get_env("UID_SALT")
+    # salt: System.get_env("INK_SERVER_UID_SALT")
   ])
 
   def encode(id) do
