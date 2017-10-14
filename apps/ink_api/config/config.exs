@@ -14,8 +14,7 @@ config :ink_api, InkApi.Endpoint,
   url: [host: "localhost"],
   secret_key_base: System.get_env("INK_API_SECRET_KEY_BASE"),
   render_errors: [view: InkApi.ErrorView, accepts: ~w(json)],
-  pubsub: [name: InkPubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: InkPubSub]
 
 # Configures Elixir's Logger
 config :logger, :console,
