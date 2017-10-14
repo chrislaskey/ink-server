@@ -1,7 +1,7 @@
 language: elixir
 
 addons:
-  postgresql: "9.4"
+  postgresql: "9.6"
 
 env:
   global:
@@ -19,7 +19,7 @@ matrix:
   #     otp_release: 19.3
 
 before_install:
-  - cp config/travis.exs config/test.exs
+  - cp apps/ink_server/config/travis.exs apps/ink_server/config/test.exs
   - mix local.rebar --force
 
 before_script:
