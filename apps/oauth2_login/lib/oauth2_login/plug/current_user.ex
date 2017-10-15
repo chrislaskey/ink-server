@@ -1,4 +1,4 @@
-defmodule OAuth2Login.Plug.Context do
+defmodule OAuth2Login.Plug.CurrentUser do
   @behaviour Plug
 
   import Plug.Conn
@@ -8,8 +8,8 @@ defmodule OAuth2Login.Plug.Context do
   def call(conn, _) do
     case Guardian.Plug.current_resource(conn) do
       nil -> conn
-      user -> 
-        put_private(conn, :absinthe, %{context: %{current_user: user}})
+      user ->
+        put_private(conn, :plug_oauth2_login, %{current_user: user})
     end
   end
 end

@@ -8,6 +8,9 @@ defmodule OAuth2Login.Client do
     end
   end
 
+  def get_user(%Plug.Conn{} = conn) do
+    Guardian.Plug.current_resource(conn)
+  end
   def get_user(token) do
     case decode(token) do
       {:ok, %{"sub" => sub}} -> Serializer.from_token(sub)

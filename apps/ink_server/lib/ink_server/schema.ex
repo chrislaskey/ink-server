@@ -11,9 +11,6 @@ defmodule InkServer.Schema do
       alias InkServer.Repo
       alias InkServer.Schema
 
-      @primary_key {:id, :binary_id, autogenerate: true}
-      @foreign_key_type :binary_id
-
       def preload(resource, includes) do
         InkServer.Repo.preload(resource, includes)
       end

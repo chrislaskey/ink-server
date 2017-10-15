@@ -1,16 +1,17 @@
 defmodule InkServer.User do
   use InkServer.Schema
 
-  alias Ecto.Changeset
   alias Comeonin.Bcrypt
-  alias InkServer.User
+
+  @primary_key {:id, :binary_id, autogenerate: true}
 
   schema "users" do
+    field :email, :string
+    field :username, :string
     field :name, :string
     field :first_name, :string
     field :last_name, :string
     field :locale, :string
-    field :email, :string
     field :password, :string, virtual: true
     field :password_hash, :string
     has_many :notes, InkServer.Note
@@ -21,7 +22,7 @@ defmodule InkServer.User do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :email, :first_name, :last_name, :locale])
+    |> cast(params, [:id, :name, :email, :first_name, :last_name, :locale])
     |> validate_required([:name, :email])
   end
 
@@ -42,12 +43,16 @@ defmodule InkServer.User do
 
   defp put_password_hash(changeset) do
     case changeset do
-      %Changeset{valid?: true, changes: %{password: password}} ->
+      %{valid?: true, changes: %{password: password}} ->
         put_change(changeset, :password_hash, Bcrypt.hashpwsalt(password))
       _ ->
         changeset
     end
   end
+
+  # Queries
+
+  def get(id), do: Repo.get(User, id)
 
   # Mutations
 

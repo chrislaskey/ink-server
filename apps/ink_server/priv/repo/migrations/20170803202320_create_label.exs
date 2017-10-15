@@ -5,7 +5,7 @@ defmodule InkServer.Repo.Migrations.CreateLabel do
     create table(:labels) do
       add :color, :string
       add :name, :string
-      add :user_id, references(:users, on_delete: :nothing)
+      add :user_id, references(:users, on_delete: :nothing, type: :uuid)
 
       timestamps()
     end

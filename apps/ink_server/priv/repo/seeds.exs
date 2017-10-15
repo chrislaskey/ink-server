@@ -11,23 +11,23 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias InkServer.User
-alias InkServer.Note
-alias InkServer.Repo
+# alias InkServer.User
+# alias InkServer.Note
+# alias InkServer.Repo
 
-Repo.insert!(%User{name: "Chris Laskey", email: "contact@chrislaskey.com"})
-Repo.insert!(%User{name: "Denali", email: "denali@chrislaskey.com"})
+# Repo.insert!(%User{name: "John", email: "john@example.com"})
+# Repo.insert!(%User{name: "Beth", email: "beth@example.com"})
 
-Enum.map(1..10, fn(_) ->
-  Repo.insert(%Note{
-    secret: Secret.create,
-    title: Faker.Lorem.sentence,
-    body: Faker.Lorem.paragraph,
-    user_id: [1, 2] |> Enum.take_random(1) |> hd
-  })
-    |> Note.add_uid
-    |> Repo.update
-end)
+# Enum.map(1..10, fn(_) ->
+#   Repo.insert(%Note{
+#     secret: Secret.create,
+#     title: Faker.Lorem.sentence,
+#     body: Faker.Lorem.paragraph,
+#     user_id: [1, 2] |> Enum.take_random(1) |> hd
+#   })
+#     |> Note.add_uid
+#     |> Repo.update
+# end)
 
 ### Alternative way using a Module to organize code:
 

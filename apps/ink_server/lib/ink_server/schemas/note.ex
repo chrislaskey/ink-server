@@ -6,7 +6,7 @@ defmodule InkServer.Note do
     field :secret, :string
     field :title, :string
     field :body, :string
-    belongs_to :user, InkServer.User
+    belongs_to :user, InkServer.User, type: :binary_id
     many_to_many :labels, InkServer.Label, join_through: "labels_notes", on_replace: :delete
 
     timestamps()

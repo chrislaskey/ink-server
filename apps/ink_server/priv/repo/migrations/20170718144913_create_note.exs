@@ -7,7 +7,7 @@ defmodule InkServer.Repo.Migrations.CreateNote do
       add :secret, :string
       add :title, :string
       add :body, :text
-      add :user_id, references(:users, on_delete: :nothing)
+      add :user_id, references(:users, on_delete: :nothing, type: :uuid)
       timestamps()
     end
 

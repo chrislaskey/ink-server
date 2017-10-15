@@ -7,7 +7,7 @@ defmodule InkServer.Label do
     field :name, :string
     field :color, :string
     field :note_count, :integer, virtual: true
-    belongs_to :user, InkServer.User
+    belongs_to :user, InkServer.User, type: :binary_id
     many_to_many :notes, InkServer.Note, join_through: "labels_notes"
 
     timestamps()

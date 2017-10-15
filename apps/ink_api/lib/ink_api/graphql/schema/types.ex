@@ -1,6 +1,6 @@
 defmodule InkApi.GraphQL.Schema.Types do
   use Absinthe.Schema.Notation
-  use Absinthe.Ecto, repo: InkApi.Repo
+  use Absinthe.Ecto, repo: InkServer.Repo
 
   object :label do
     field :id, :id

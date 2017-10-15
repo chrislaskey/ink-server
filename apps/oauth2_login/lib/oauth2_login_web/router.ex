@@ -4,7 +4,7 @@ defmodule OAuth2LoginWeb.Router do
   pipeline :graphql do
     plug Guardian.Plug.VerifyHeader, realm: "Bearer"
     plug Guardian.Plug.LoadResource
-    plug OAuth2Login.Plug.Context
+    plug OAuth2Login.Plug.CurrentUser
   end
 
   if Application.get_env(:oauth2_login, :graphiql, false) do
