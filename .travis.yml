@@ -30,6 +30,7 @@ matrix:
 
 before_install:
   - cp apps/ink_server/config/travis.exs apps/ink_server/config/test.exs
+  - cp apps/oauth2_login/config/travis.exs apps/oauth2_login/config/test.exs
   - mix local.rebar --force
 
 before_script:
