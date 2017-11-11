@@ -29,8 +29,6 @@ defmodule InkServer.Mixfile do
       {:ecto, "~> 2.2"},
       {:comeonin, "~> 2.5"},
       {:guardian, "~> 0.14.4"},
-      {:oauth2_facebook, "~> 0.1"},
-      {:oauth2_github, "~> 0.1"},
       {:faker, "~> 0.7"},
       {:hashids, "~> 2.0"},
       {:ink_pubsub, in_umbrella: true},
